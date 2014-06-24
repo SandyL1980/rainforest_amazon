@@ -2,11 +2,13 @@ class ProductsController < ApplicationController
   
   def index
   	@products = Product.all
+    @categories = Category.all
   end
 
 
   def show
   	@product = Product.find(params[:id])
+    @prod_category = @product.category_id
 
     if current_user
       @review = @product.reviews.build
@@ -16,6 +18,7 @@ class ProductsController < ApplicationController
 
   def new
   	@product = Product.new
+    @categories = Category.all
   end
 
 
@@ -54,6 +57,6 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-	params.require(:product).permit(:name, :description, :price_in_cents)
+	params.require(:product).permit(:name, :description, :price_in_cents, :category_id)
   end
 end

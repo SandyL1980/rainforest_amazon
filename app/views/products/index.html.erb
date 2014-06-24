@@ -1,5 +1,11 @@
 <h1>All Products</h1>
 
+<% @categories.each do |category| %>
+
+<p><%= link_to category.name, "categories/#{category.id}" %> | </p>
+
+<% end %>
+
 <% @products.each do |product| %>
 
 	<h2><u><%= link_to product.name, "products/#{product.id}" %></strong></u>

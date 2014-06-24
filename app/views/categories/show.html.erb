@@ -1,0 +1,18 @@
+<h1>Categories#show</h1>
+
+
+
+<h2><%= @category[:name]%> - <%= @category[:id]%></h2>
+
+<% @all_categories_products.each do |cat| %>
+<ul>
+	<li><%= cat[:name] %></li>
+	<li></li>
+</ul>
+
+<% end %>
+
+
+<ul>
+	<li><%= link_to "Back", categories_path %></li>
+</ul>

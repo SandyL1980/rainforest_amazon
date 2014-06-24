@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
  
 
+  # get 'categories/index'
+
+  # get 'categories/new'
+
+  # get 'categories/show'
+
+  # get 'categories/edit'
+
   root :to => "products#index"
 
 
   resources :users, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
-
+  resources :categories
 
   resources :products do
     resources :reviews, :only => [:show, :create, :destroy]
