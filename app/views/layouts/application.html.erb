@@ -8,11 +8,25 @@
 </head>
 <body>
 
+
 <div>
 
 	<a href="/">Back</a> | <a href="/products">All Products</a> | <a href="/products/new">Add Product</a>
 
 </div>
+
+
+  <ul class="userinfo">
+
+  <% if current_user %>
+    <li>Signed in as <%= current_user.name %></li>
+    <li><%= link_to "Log Out", session_path("current"), method: :delete %></li>
+  <% else %>
+    <li><%= link_to "Sign Up!", new_user_path %></li>
+    <li><%= link_to "Log In", new_session_path %></li>
+  <% end %>
+
+</ul>
 
 
   <% if flash[:notice] %>
@@ -27,17 +41,6 @@
 <%= yield %>
 
 
-<ul class="userinfo">
-
-	<% if current_user %>
-		<li>Signed in as <%= current_user.email %></li>
-		<li><%= link_to "Log Out", session_path("current") %></li>
-	<% else %>
-		<li><%= link_to "Sign Up!", new_user_path %></li>
-		<li><%= link_to "Log In", new_session_path %></li>
-	<% end %>
-
-</ul>
 
 </body>
 </html>
