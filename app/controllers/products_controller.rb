@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_filter :ensure_logged_in, :only => [:show]
+  # before_action :ensure_logged_in, except: [:index, :show]
   
   def index
   	@products = Product.all
@@ -8,12 +9,15 @@ class ProductsController < ApplicationController
 
 
   def show
-  	@product = Product.find(params[:id])
-    @prod_category = @product.category_id
 
-    if current_user
-      @review = @product.reviews.build
-    end
+    #I want to display the name of product associated
+  	@product = Product.find(params[:id])
+    @review = @product.reviews.build
+    #@prod_category = @product[:category_id]
+
+    # if current_user
+    #   @review = @product.reviews.build
+    # end
   
   end
 
@@ -24,12 +28,16 @@ class ProductsController < ApplicationController
 
 
   def create 
-
-  @product = Product.new(product_params)
+  @product = current_user.products.build(product_params)
+  # @product = Product.new(product_params)
+  # @product.user_id = current_user.id
 
 	  if @product.save
-	  	redirect_to root_url, :notice => 'Your product was created'
+	  	redirect_to root_url, :notice => 'Your product was successfully created'
+      redirect_to product_path(@product)
 	  else
+      #.now will make it appear right away wihout a redirect
+      flash.now[:alert] = "OMG something wrong happened"
 	  	render 'new'
 	  end
 
@@ -46,6 +54,8 @@ class ProductsController < ApplicationController
   	else
   		render 'edit'
   	end
+
+    
   end
 
 

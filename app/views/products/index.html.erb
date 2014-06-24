@@ -2,13 +2,13 @@
 
 <% @categories.each do |category| %>
 
-<p><%= link_to category.name, "categories/#{category.id}" %> | </p>
+<p><%= link_to category.name, category_path(category) %> | </p>
 
 <% end %>
 
 <% @products.each do |product| %>
 
-	<h2><u><%= link_to product.name, "products/#{product.id}" %></strong></u>
+	<h2><u><%= link_to product.name, product_path(product) %></strong></u>
 	<p><%= product.description %> | <%= product.formatted_price %></p>
 
 <% end %>

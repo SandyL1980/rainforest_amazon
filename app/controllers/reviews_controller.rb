@@ -5,6 +5,8 @@ before_filter :ensure_logged_in, :only => [:edit, :create, :show, :update, :dest
 
   def show
   	@review = Review.find(params[:id])
+
+    @Product = @review.products.build(review_params)
   end
 
   def create
@@ -15,6 +17,7 @@ before_filter :ensure_logged_in, :only => [:edit, :create, :show, :update, :dest
   	if @review.save
       redirect_to products_path, notice: 'Review created successfully'
     else
+      flash.now[:alert] = "your comment failed to be created"
       render 'products/show'
     end
 

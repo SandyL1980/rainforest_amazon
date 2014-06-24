@@ -1,4 +1,9 @@
-<h1>Profile</h1>
+<h1>User Profile</h1>
 
 <p><%= @user[:name] %></p>
 <p><%= @user[:email] %></p>
+
+<ul>
+	<li><%= link_to "Change Account Settings", edit_user_path(@user) %></li>
+	<li><%= link_to "Delete Account", user_path(@user) , method: :delete, data: { confirm: 'Are you sure?' } %></li>
+</ul>

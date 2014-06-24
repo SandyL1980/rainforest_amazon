@@ -1,12 +1,11 @@
 
-
 <br>
 
 <h2><%= @product[:name]%> | ID: <%= @product[:id] %></h2>
 <p><%= @product[:description]%> - <%= @product.formatted_price %></p>
 
 <!-- find a a way to display category name -->
-<p><%= @prod_category[:name] %></p>
+<p>Category: <%= @product.category_name %></p>
 
 <% if current_user %>
 
@@ -14,15 +13,22 @@
 
   <p>Reviews for <%= @product.name %></p>
 
+
+
+ <% if @product.reviews %>
   <% @product.reviews.each do |review| %>
     <p>
-      <%= review.comment %>
-      <br>
-      <% if review.user != nil %>
-        <em> by <%= review.user.email %></em>
-        Added on: <%= review.created_at %>
+
+     
+          <%= review.comment %>
+          <br>
+          <% if review.user != nil %>
+            <em> by <%= review.user.email %></em>
+            Added on: <%= review.created_at %>
+          <% end %>
+        </p>
       <% end %>
-    </p>
+
   <% end %>
 
 <% end %>
